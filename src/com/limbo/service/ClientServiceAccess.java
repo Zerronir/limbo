@@ -10,4 +10,10 @@ public class ClientServiceAccess implements ClientService{
         ClientDAO cd = new ClientAccess();
         return cd.findByUsernameEqualsAndPasswordEquals(username, password);
     }
+
+    @Override
+    public Client save(Client client) throws Exception {
+        ClientDAO cd = new ClientAccess();
+        return cd.save(client) ;
+    }
 }

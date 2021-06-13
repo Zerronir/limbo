@@ -59,4 +59,9 @@ public class Client {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s %s %s %s %s", email, nom, cognom1, cognom2, username, contrasenya);
+    }
 }
