@@ -103,7 +103,7 @@ public class PaginaPrincipal extends javax.swing.JPanel {
 
     // Ver la página de los datos del usuario
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-        Main.showBlankPanel();
+        Main.showCartPage();
     }
 
     // Ver el carrito

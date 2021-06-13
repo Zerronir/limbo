@@ -15,4 +15,10 @@ public class ProducteServiceAccess implements ProducteService{
         ProducteDAO pd = new ProducteAccess();
         return pd.taulellProductes();
     }
+
+    @Override
+    public Producte findByIdEquals(int numero_producte) throws Exception {
+        ProducteDAO pd = new ProducteAccess();
+        return pd.findByIdEquals(numero_producte);
+    }
 }

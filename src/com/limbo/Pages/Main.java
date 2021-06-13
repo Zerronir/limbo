@@ -1,5 +1,6 @@
 package com.limbo.Pages;
 
+import com.limbo.entities.Cistella;
 import com.limbo.entities.Client;
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ public class Main {
     public static CardLayout cl;
     public static JPanel panel;
     public static Client logedUser;
+    public static Cistella cistella = new Cistella();
 
     static JMenuItem itemImportData;
     static JMenuItem itemExportDatabase;
@@ -27,7 +29,7 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Limbo APP");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(1920, 1080);
+            frame.setSize(1366, 728);
 
             panel = new JPanel();
             frame.setContentPane(panel);
@@ -52,6 +54,9 @@ public class Main {
 
             PaginaCliente paginaCliente = new PaginaCliente();
             panel.add(paginaCliente, "PaginaClient");
+
+            PaginaCistella cartPage = new PaginaCistella();
+            panel.add(cartPage, "PaginaCistella");
 
             JMenuBar jMenuBar = new JMenuBar();
             frame.setJMenuBar(jMenuBar);
@@ -108,7 +113,16 @@ public class Main {
     }
 
     public static void showFirstPage() {
-        cl.show(panel, "PaginaPrincipal");
+        Main.cistella.setLinies(null);
+        PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
+        panel.add(paginaPrincipal, "paginaPrincipal");
+        cl.show(panel, "paginaPrincipal");
+    }
+
+    public static void showCartPage() {
+        PaginaCistella paginaCistella = new PaginaCistella();
+        panel.add(paginaCistella, "cistella");
+        cl.show(panel, "cistella");
     }
 
     public static void showClientPage() {

@@ -1,10 +1,15 @@
 package com.limbo.Pages;
 
+import com.limbo.entities.Cistella;
+import com.limbo.entities.LineaCistella;
 import com.limbo.entities.Producte;
 import com.limbo.service.ProducteServiceAccess;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -31,6 +36,7 @@ public class TaulaProductes extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
+
 
 
         String[] col = {"Número de producte", "Nom de Producte", "Descripcio", "PVP", "IVA", "Marca", "Unitat de Mesura", "Pes", "Categoria"};
@@ -66,26 +72,112 @@ public class TaulaProductes extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(jTable1);
 
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel1 = new JLabel();
+        jLabel1.setFont(new java.awt.Font("Tahoma", Font.BOLD, 50)); // NOI18N
+        jLabel1.setText("LLISTAT DE PRODUCTES");
+
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+
+        jButton1 = new JButton();
+        jButton1.setText("Veure Cistella");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2 = new JButton();
+        jButton2.setText("Sortir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createSequentialGroup()
                                 .addContainerGap(450, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jButton2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jButton1))
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(450, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(174, Short.MAX_VALUE)
+                                .addContainerGap(119, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(195, Short.MAX_VALUE))
+                                .addGap(57, 57, 57)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButton1)
+                                        .addComponent(jButton2))
+                                .addContainerGap(91, Short.MAX_VALUE))
         );
     }// </editor-fold>
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        String n = JOptionPane.showInputDialog(
+                null,
+                "Cuantes unitats del producte vols");
+
+        LineaCistella lineaCistella = new LineaCistella();
+        int numero_producte = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+        try {
+            Producte p = psa.findByIdEquals(numero_producte);
+            int qty = Integer.parseInt(n);
+            lineaCistella.setProducte(p);
+            long preu = (long) (p.getPvp() * p.getIva()) / 100;
+            lineaCistella.setPreu(preu);
+            lineaCistella.setQuantitat(qty);
+
+            List<LineaCistella> llista = new ArrayList<>();
+
+            llista.add(lineaCistella);
+
+            Main.cistella.setLinies(llista);
+
+            JOptionPane.showMessageDialog(this, Main.cistella.getLinies().toString());
+            JOptionPane.showMessageDialog(this, "S'han afegit " + qty + " unitats del producte " + p.getNom() + " al carretó.");
+
+        }catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+
+    }
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        Main.showFirstPage();
+    }
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+        Main.showFirstPage();
+    }
 
     // Variables declaration - do not modify
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration

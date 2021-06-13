@@ -8,4 +8,5 @@ import java.util.Vector;
 
 public interface ProducteDAO {
     Vector<Producte> taulellProductes() throws Exception;
+    Producte findByIdEquals(int numero_producte) throws Exception;
 }
