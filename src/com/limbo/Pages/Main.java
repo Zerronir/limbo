@@ -44,8 +44,14 @@ public class Main {
             Registre registreForm = new Registre();
             panel.add(registreForm, "Registre");
 
+            TaulaProductes taulaProductes = new TaulaProductes();
+            panel.add(taulaProductes, "TAULA_PRODUCTES");
+
             PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
             panel.add(paginaPrincipal, "PaginaPrincipal");
+
+            PaginaCliente paginaCliente = new PaginaCliente();
+            panel.add(paginaCliente, "PaginaClient");
 
             JMenuBar jMenuBar = new JMenuBar();
             frame.setJMenuBar(jMenuBar);
@@ -87,8 +93,10 @@ public class Main {
 
     public static void showTaulaProductesPanel() {
         cl.show(panel, "TAULA_PRODUCTES");
-        itemImportData.setEnabled(true);
-        itemExportDatabase.setEnabled(true);
+        /*
+            itemImportData.setEnabled(true);
+            itemExportDatabase.setEnabled(true);
+        */
     }
 
     public static void showLoginPanel() {
@@ -101,5 +109,9 @@ public class Main {
 
     public static void showFirstPage() {
         cl.show(panel, "PaginaPrincipal");
+    }
+
+    public static void showClientPage() {
+        cl.show(panel, "PaginaClient");
     }
 }

@@ -1,9 +1,9 @@
 package com.limbo.entities;
 
 public class Producte {
-    int id, iva, categoria;
+    int id, iva;
     double pvp, pes;
-    String nom, descripcio, marca, unitat_mesura;
+    String nom, descripcio, marca, unitat_mesura, categoria;
 
     public int getId() {
         return id;
@@ -21,11 +21,11 @@ public class Producte {
         this.iva = iva;
     }
 
-    public int getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(int categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 

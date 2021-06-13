@@ -96,4 +96,85 @@ public class ClientAccess implements ClientDAO {
             throw new Exception("L'usuari no s'ha pogut registrar, torna-ho a provar per favor");
         }
     }
+
+    @Override
+    public Client update(Client client) throws SQLException, Exception {
+        Client c = client;
+
+        Connection conn = Database.getConnection();
+        PreparedStatement ps = conn.prepareStatement("");
+
+        if(!c.getContrasenya().equals("")) {
+            ps = conn.prepareStatement("UPDATE client SET email = ?, nom = ?, cognom1 = ?, cognom2 = ?, username = ?, contrasenya = ? WHERE numero_client = ?");
+            ps.setString(1, c.getEmail());
+            ps.setString(2, c.getNom());
+            ps.setString(3, c.getCognom1());
+            ps.setString(4, c.getCognom2());
+            ps.setString(5, c.getUsername());
+            ps.setString(6, c.getContrasenya());
+            ps.setInt(7, c.getNumero_client());
+        } else {
+            ps = conn.prepareStatement("UPDATE client SET email = ?, nom = ?, cognom1 = ?, cognom2 = ?, username = ? WHERE numero_client = ?");
+            ps.setString(1, c.getEmail());
+            ps.setString(2, c.getNom());
+            ps.setString(3, c.getCognom1());
+            ps.setString(4, c.getCognom2());
+            ps.setString(5, c.getUsername());
+            ps.setInt(6, c.getNumero_client());
+        }
+
+        if(ps.execute()) {
+            ps.close();
+            Database.closeConnection();
+            return c;
+        } else {
+            ps.close();
+            Database.closeConnection();
+            throw new Exception("L'usuari no ha pogut ser actualitzat");
+        }
+    }
+
+    @Override
+    public boolean delete(Client client) throws Exception {
+        Connection conn = Database.getConnection();
+        PreparedStatement ps = conn.prepareStatement("DELETE * FROM client WHERE numero_client = ?");
+        ps.setInt(1, client.getNumero_client());
+
+        if(ps.execute()) {
+            ps.close();
+            Database.closeConnection();
+            return true;
+        } else {
+            throw new Exception("No s'ha pogut eliminar el contacte");
+        }
+    }
+
+    @Override
+    public Client getClientByNumero_Client(int numero_client) throws Exception {
+        Connection conn = Database.getConnection();
+        Client c = new Client();
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM client WHERE numero_client = ?");
+        ps.setInt(1, numero_client);
+
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next()) {
+            c.setNom(rs.getString("nom"));
+            c.setCognom1(rs.getString("cognom1"));
+            c.setCognom2(rs.getString("cognom2"));
+            c.setEmail(rs.getString("email"));
+            c.setUsername(rs.getString("username"));
+
+            ps.close();
+            rs.close();
+            Database.closeConnection();
+
+            // Retornam el client
+            return c;
+        } else {
+            Database.closeConnection();
+            throw new Exception("L'usuari no existeix amb el número de client introduit");
+        }
+
+    }
 }

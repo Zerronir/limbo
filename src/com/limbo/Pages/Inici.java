@@ -133,8 +133,7 @@ public class Inici extends javax.swing.JPanel {
             String username = userName.getText();
             String password = cs.hashPassword(passwordField.getText());
 
-            Client c = cs.findByUsernameEqualsAndPasswordEquals(username, password);
-
+            Main.logedUser = cs.findByUsernameEqualsAndPasswordEquals(username, password);
             Main.showFirstPage();
 
         }catch (Exception ex) {

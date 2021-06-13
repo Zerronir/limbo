@@ -96,18 +96,22 @@ public class PaginaPrincipal extends javax.swing.JPanel {
         );
     }// </editor-fold>
 
+    // Ver la tabla de productos
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         Main.showTaulaProductesPanel();
     }
 
+    // Ver la página de los datos del usuario
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         Main.showBlankPanel();
     }
 
+    // Ver el carrito
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-        Main.showBlankPanel();
+        Main.showClientPage();
     }
 
+    // Botón para salir del programa
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         System.exit(0);
     }
