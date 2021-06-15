@@ -1,6 +1,9 @@
 package com.limbo.Pages;
 
+import com.limbo.DAO.TargetAccess;
 import com.limbo.entities.LineaCistella;
+import com.limbo.service.TargetaService;
+import com.limbo.service.TargetaServiceAccess;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -64,7 +67,11 @@ public class PaginaCistella extends javax.swing.JPanel {
         jButton1.setText("Confirmar compra");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+                    jButton1ActionPerformed(evt);
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage(), "El client no té targetes", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
 
@@ -105,12 +112,14 @@ public class PaginaCistella extends javax.swing.JPanel {
         );
     }// </editor-fold>
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        Main.showFirstPage();
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws Exception {
+        Main.showPurchasePage();
+
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        Main.exitDeCistella = 1;
+        Main.showFirstPage();
     }
 
 

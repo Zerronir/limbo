@@ -171,7 +171,7 @@ public class TaulaProductes extends javax.swing.JPanel {
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-        Main.showFirstPage();
+        Main.showCartPage();
     }
 
     // Variables declaration - do not modify

@@ -16,6 +16,7 @@ public class Main {
     public static JPanel panel;
     public static Client logedUser;
     public static Cistella cistella = new Cistella();
+    public static int exitDeCistella = 0;
 
     static JMenuItem itemImportData;
     static JMenuItem itemExportDatabase;
@@ -113,7 +114,8 @@ public class Main {
     }
 
     public static void showFirstPage() {
-        Main.cistella.setLinies(null);
+        if(exitDeCistella == 1) Main.cistella.setLinies(null);
+
         PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
         panel.add(paginaPrincipal, "paginaPrincipal");
         cl.show(panel, "paginaPrincipal");
@@ -125,7 +127,27 @@ public class Main {
         cl.show(panel, "cistella");
     }
 
+    public static void showPurchasePage() throws Exception {
+        PaginaCompra paginaCompra = new PaginaCompra();
+        panel.add(paginaCompra, "compra");
+
+        // LOAD TEXT COMPONENTS
+        paginaCompra.setComponents();
+
+        cl.show(panel, "compra");
+    }
+
     public static void showClientPage() {
+        PaginaCliente paginaCliente = new PaginaCliente();
+        panel.add(paginaCliente, "PaginaClient");
+        paginaCliente.loadValues();
         cl.show(panel, "PaginaClient");
     }
+
+    public static void showCardPage() {
+        PaginaTargeta paginaTargeta = new PaginaTargeta();
+        panel.add(paginaTargeta, "PaginaTargeta");
+        cl.show(panel, "PaginaTargeta");
+    }
+
 }

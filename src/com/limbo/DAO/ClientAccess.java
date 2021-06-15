@@ -172,6 +172,8 @@ public class ClientAccess implements ClientDAO {
             // Retornam el client
             return c;
         } else {
+            ps.close();
+            rs.close();
             Database.closeConnection();
             throw new Exception("L'usuari no existeix amb el número de client introduit");
         }
