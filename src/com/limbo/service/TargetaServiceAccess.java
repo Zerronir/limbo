@@ -25,4 +25,10 @@ public class TargetaServiceAccess implements TargetaService{
         TargetaDAO td = new TargetAccess();
         return td.delete(targeta);
     }
+
+    @Override
+    public Targeta getByNumeroEquals(String num) throws Exception {
+        TargetaDAO td = new TargetAccess();
+        return td.getByNumeroEquals(num);
+    }
 }

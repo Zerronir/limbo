@@ -57,4 +57,10 @@ public class Targeta {
     public void setTipus(String tipus) {
         this.tipus = tipus;
     }
+
+    @Override
+    public String toString() {
+        String s = Long.toString(getNumero());
+        return s;
+    }
 }

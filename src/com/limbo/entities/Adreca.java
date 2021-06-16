@@ -67,4 +67,9 @@ public class Adreca {
     public void setCp(String cp) {
         this.cp = cp;
     }
+
+    @Override
+    public String toString() {
+        return getCarrer();
+    }
 }

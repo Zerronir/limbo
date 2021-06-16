@@ -8,4 +8,5 @@ public interface TargetaDAO {
     ArrayList<Targeta> findAllByUserIdEquals(int user_id) throws Exception;
     Targeta save(Targeta targeta) throws Exception;
     Targeta delete(Targeta targeta) throws Exception;
+    Targeta getByNumeroEquals(String num) throws Exception;
 }

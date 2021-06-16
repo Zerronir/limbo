@@ -1,9 +1,8 @@
 package com.limbo.entities;
 
 public class DetallCompra {
-    int compra_id, producte_id;
+    int compra_id, producte_id, unitats_producte;
     double pvp, pes;
-    String unitats_producte;
 
     public int getCompra_id() {
         return compra_id;
@@ -37,11 +36,11 @@ public class DetallCompra {
         this.pes = pes;
     }
 
-    public String getUnitats_producte() {
+    public int getUnitats_producte() {
         return unitats_producte;
     }
 
-    public void setUnitats_producte(String unitats_producte) {
+    public void setUnitats_producte(int unitats_producte) {
         this.unitats_producte = unitats_producte;
     }
 }

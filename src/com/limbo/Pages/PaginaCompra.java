@@ -1,10 +1,15 @@
 package com.limbo.Pages;
 
 import com.limbo.DAO.TargetAccess;
-import com.limbo.entities.Targeta;
+import com.limbo.entities.*;
+import com.limbo.service.*;
 
+import javax.sound.sampled.Line;
 import javax.swing.*;
+import java.awt.*;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PaginaCompra extends javax.swing.JPanel {
     TargetAccess ts = new TargetAccess();
@@ -26,6 +31,7 @@ public class PaginaCompra extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -37,18 +43,12 @@ public class PaginaCompra extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 50)); // NOI18N
         jLabel1.setText("COMPRA DE PRODUCTE");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Targeta de crèdit");
 
@@ -89,6 +89,9 @@ public class PaginaCompra extends javax.swing.JPanel {
             }
         });
 
+        jLabel13.setText("Adreça");
+
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,10 +104,6 @@ public class PaginaCompra extends javax.swing.JPanel {
                                                         .addComponent(jLabel5)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(jLabel12))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addComponent(jLabel2)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                                 .addGroup(layout.createSequentialGroup()
@@ -113,29 +112,37 @@ public class PaginaCompra extends javax.swing.JPanel {
                                                                         .addComponent(jLabel4))
                                                                 .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                                        .addComponent(jLabel11)
-                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                        .addComponent(jLabel10))
                                                                 .addGroup(layout.createSequentialGroup()
                                                                         .addComponent(jLabel9)
                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                         .addComponent(jLabel8))
                                                                 .addGroup(layout.createSequentialGroup()
                                                                         .addComponent(jLabel7)
-                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                        .addComponent(jLabel6)))))
+                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                                                                        .addComponent(jLabel6))))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(jLabel2)
+                                                                .addComponent(jLabel13))
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                .addComponent(jComboBox1, 0, 253, Short.MAX_VALUE)
+                                                                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                        .addComponent(jLabel11)
+                                                        .addGap(29, 29, 29)
+                                                        .addComponent(jLabel10))))
                                 .addContainerGap(232, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(65, Short.MAX_VALUE)
+                                .addContainerGap(64, Short.MAX_VALUE)
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel3)
                                         .addComponent(jLabel4))
@@ -147,7 +154,11 @@ public class PaginaCompra extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel2)
                                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel13)
+                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel6)
                                         .addComponent(jLabel7))
@@ -159,35 +170,66 @@ public class PaginaCompra extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel10)
                                         .addComponent(jLabel11))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                                 .addComponent(jButton1)
-                                .addGap(18, 72, Short.MAX_VALUE)
+                                .addGap(18, 71, Short.MAX_VALUE)
                                 .addComponent(jButton2)
-                                .addContainerGap(65, Short.MAX_VALUE))
+                                .addContainerGap(64, Short.MAX_VALUE))
         );
     }// </editor-fold>
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        try {
+            TargetaService ts = new TargetaServiceAccess();
+            AdrecaService as = new AdrecaServiceAccess();
+            Compra compra = new Compra();
+
+            JOptionPane.showMessageDialog(null, jComboBox1.getSelectedItem().toString());
+            JOptionPane.showMessageDialog(null, jComboBox2.getSelectedItem().toString());
+
+            compra.setTargeta_id(ts.getByNumeroEquals(jComboBox1.getSelectedItem().toString()).getId());
+            compra.setAdreca_id(as.getAdrecaByCarrerEquals(jComboBox2.getSelectedItem().toString()).getId());
+            compra.setClient_id(Main.logedUser.getNumero_client());
+            compra.setId_transaccio(Main.logedUser.getNom() + "" + Main.llista.get(0).getProducte().getNom() + "" + Main.llista.get(0).getQuantitat());
+            java.util.Date d = new java.util.Date();
+            compra.setData(new Date(d.getTime()));
+
+            CompraService compraService = new CompraServiceAccess();
+            Compra saved = compraService.save(compra);
+
+            for (int i = 0; i < Main.llista.size(); i++) {
+                DetallCompra detall = new DetallCompra();
+                detall.setCompra_id(saved.getId());
+                detall.setProducte_id(Main.llista.get(i).getProducte().getId());
+                detall.setPvp(Main.llista.get(i).getProducte().getPvp());
+                detall.setPes(Main.llista.get(i).getProducte().getPes());
+                detall.setUnitats_producte(Main.llista.get(i).getQuantitat());
+                compraService.saveDetall(detall);
+            }
+
+            JOptionPane.showMessageDialog(null, "La compra " + saved.getId_transaccio() + " s'ha processat correctament");
+            Main.showFirstPage();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error al processar la compra", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+        Main.exitDeCistella = 1;
+        Main.showFirstPage();
     }
-
 
     // Variables declaration - do not modify
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Targeta> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -201,18 +243,61 @@ public class PaginaCompra extends javax.swing.JPanel {
 
     public void setComponents() throws Exception {
         jLabel4.setText(Main.logedUser.getNom()+ " " + Main.logedUser.getCognom1() + " " + Main.logedUser.getCognom2());
+        double preuNoIva = 0;
+        List<LineaCistella> lineaCistella = Main.cistella.getLinies();
+
+        for (int i = 0; i < lineaCistella.size(); i++) {
+            int qty = lineaCistella.get(i).getQuantitat();
+            double noVat = qty * lineaCistella.get(i).getProducte().getPvp();
+            preuNoIva += noVat;
+        }
+
+        double preuIva = preuNoIva + ((preuNoIva * 21) / 100);
+        int ivaTotal = 21;
+
+        jLabel6.setText(String.valueOf(preuNoIva));
+        jLabel8.setText(String.valueOf(ivaTotal) + "%");
+        jLabel10.setText(String.valueOf(preuIva));
         jLabel12.setText(Main.logedUser.getEmail());
-        fillComboBox();
     }
 
     public void fillComboBox() throws Exception {
-        ArrayList<Targeta> arrayList = ts.findAllByUserIdEquals(Main.logedUser.getNumero_client());
+        try {
+            DefaultComboBoxModel dml = new DefaultComboBoxModel();
+            List<Targeta> arrayList = ts.findAllByUserIdEquals(Main.logedUser.getNumero_client());
 
-        DefaultComboBoxModel dml = new DefaultComboBoxModel();
-        for (int i = 0; i < arrayList.size(); i++) {
-            dml.addElement(arrayList.get(i));
+            for (Targeta t : arrayList) {
+                EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        dml.addElement(t.toString());
+                    }
+                });
+            }
+            jComboBox1.setModel(dml);
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
         }
-        jComboBox1.setModel(dml);
+    }
+
+    public void fillAddressCombo() throws Exception {
+        try {
+            AdrecaService as = new AdrecaServiceAccess();
+            DefaultComboBoxModel dml = new DefaultComboBoxModel();
+            List<Adreca> arrayList = as.findAllByUserIdEquals(Main.logedUser.getNumero_client());
+
+            for (Adreca a : arrayList) {
+                EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        dml.addElement(a.toString());
+                    }
+                });
+            }
+            jComboBox2.setModel(dml);
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 }

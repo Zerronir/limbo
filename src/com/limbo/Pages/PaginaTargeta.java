@@ -3,9 +3,13 @@ package com.limbo.Pages;
 import com.limbo.entities.Targeta;
 import com.limbo.service.TargetaService;
 import com.limbo.service.TargetaServiceAccess;
+import com.mysql.cj.result.SqlDateValueFactory;
 
 import javax.swing.*;
-import java.sql.Date;
+import java.awt.event.ActionEvent;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class PaginaTargeta extends javax.swing.JPanel {
     TargetaService ts = new TargetaServiceAccess();
@@ -28,6 +32,7 @@ public class PaginaTargeta extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -45,8 +50,12 @@ public class PaginaTargeta extends javax.swing.JPanel {
 
         jLabel3.setText("Número");
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/mm/yy"))));
-
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextField1ActionPerformed(evt);
+            }
+        });
         jLabel4.setText("Data de caducitat");
 
         jLabel5.setText("Número de seguretat");
@@ -71,6 +80,8 @@ public class PaginaTargeta extends javax.swing.JPanel {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- SELECCIONA UNA TARGETA --", "Visa", "Mastercard", "Maestro" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,10 +98,10 @@ public class PaginaTargeta extends javax.swing.JPanel {
                                                         .addComponent(jLabel5))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(jFormattedTextField1)
-                                                        .addComponent(jTextField2)
                                                         .addComponent(jTextField1)
-                                                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE))))
+                                                        .addComponent(jTextField2)
+                                                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addContainerGap(164, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -107,14 +118,14 @@ public class PaginaTargeta extends javax.swing.JPanel {
                                 .addGap(92, 92, 92)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel2)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, Short.MAX_VALUE)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 21, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel3))
                                 .addGap(18, 18, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel4))
                                 .addGap(18, 18, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -124,30 +135,49 @@ public class PaginaTargeta extends javax.swing.JPanel {
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                                 .addComponent(jButton2)
-                                .addContainerGap(115, Short.MAX_VALUE))
+                                .addContainerGap(112, Short.MAX_VALUE))
         );
     }// </editor-fold>
 
+    private void jFormattedTextField1ActionPerformed(ActionEvent evt) {
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws Exception {
-            Targeta t = new Targeta();
+            try {
+                Targeta t = new Targeta();
 
-            t.setTipus(jLabel2.getText());
+                if(jComboBox1.getSelectedItem().toString().equals("-- SELECCIONA UNA TARGETA --")) {
+                    throw new Exception("Selecciona una targeta per favor");
+                }
 
-            Long numero = Long.parseLong(jLabel3.getText());
-            if(numero > 0) {
-                t.setNumero(numero);
-            } else {
-                throw new Exception("El número de la targeta ha de ser numèric i no pot estar buit");
-            }
+                t.setTipus(jComboBox1.getSelectedItem().toString());
 
-            Date date = new Date(jLabel4.getText());
-            t.setData_caducitat((java.sql.Date) date);
+                Long numero = Long.parseLong(jTextField2.getText());
+                if(numero > 0) {
+                    t.setNumero(numero);
+                } else {
+                    throw new Exception("El número de la targeta ha de ser numèric i no pot estar buit");
+                }
 
-            if(jLabel5.getText().length() > 3) {
-                throw new Exception("El codi de seguretat no pot ser superior a 3 digits");
-            } else {
-                int codi = Integer.parseInt(jLabel5.getText());
+                if(!jTextField1.equals("")) {
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    Date parsed = format.parse(jTextField1.getText());
+                    java.sql.Date date = new java.sql.Date(parsed.getTime());
+                    t.setData_caducitat(date);
+                } else {
+                    throw new Exception("La data de caducitat no pot estar buida");
+                }
+
+                int codi = Integer.parseInt(jTextField3.getText());
                 t.setCodi_seguretat(codi);
+
+                t.setClient_id(Main.logedUser.getNumero_client());
+
+                ts.save(t);
+                Main.showFirstPage();
+
+            }catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
             }
 
     }
@@ -160,6 +190,7 @@ public class PaginaTargeta extends javax.swing.JPanel {
     // Variables declaration - do not modify
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

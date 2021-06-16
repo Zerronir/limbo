@@ -149,13 +149,8 @@ public class TaulaProductes extends javax.swing.JPanel {
             lineaCistella.setPreu(preu);
             lineaCistella.setQuantitat(qty);
 
-            List<LineaCistella> llista = new ArrayList<>();
-
-            llista.add(lineaCistella);
-
-            Main.cistella.setLinies(llista);
-
-            JOptionPane.showMessageDialog(this, Main.cistella.getLinies().toString());
+            Main.llista.add(lineaCistella);
+            Main.cistella.setLinies(Main.llista);
             JOptionPane.showMessageDialog(this, "S'han afegit " + qty + " unitats del producte " + p.getNom() + " al carretó.");
 
         }catch (Exception ex) {
@@ -167,11 +162,11 @@ public class TaulaProductes extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        Main.showFirstPage();
+        Main.showCartPage();
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-        Main.showCartPage();
+        Main.showFirstPage();
     }
 
     // Variables declaration - do not modify

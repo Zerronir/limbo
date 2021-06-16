@@ -35,6 +35,9 @@ public class ProducteAccess implements ProducteDAO{
 
                 productes.add(p);
             }
+            ps.close();
+            rs.close();
+            Database.closeConnection();
             return productes;
         } else {
             Producte p = new Producte();

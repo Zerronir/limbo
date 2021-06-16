@@ -2,12 +2,15 @@ package com.limbo.Pages;
 
 import com.limbo.entities.Cistella;
 import com.limbo.entities.Client;
+import com.limbo.entities.LineaCistella;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static Connection connection;
@@ -16,6 +19,7 @@ public class Main {
     public static JPanel panel;
     public static Client logedUser;
     public static Cistella cistella = new Cistella();
+    public static List<LineaCistella> llista = new ArrayList<>();
     public static int exitDeCistella = 0;
 
     static JMenuItem itemImportData;
@@ -133,8 +137,17 @@ public class Main {
 
         // LOAD TEXT COMPONENTS
         paginaCompra.setComponents();
+        paginaCompra.fillComboBox();
+        paginaCompra.fillAddressCombo();
 
         cl.show(panel, "compra");
+    }
+
+    public static void showAddressPage() {
+        PaginaAdreca paginaAdreca = new PaginaAdreca();
+        panel.add(paginaAdreca, "adreces");
+        paginaAdreca.loadCombo();
+        cl.show(panel, "adreces");
     }
 
     public static void showClientPage() {

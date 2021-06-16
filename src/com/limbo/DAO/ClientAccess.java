@@ -49,6 +49,7 @@ public class ClientAccess implements ClientDAO {
             }
 
             ps.close();
+            rs.close();
             Database.closeConnection();
 
             if(c.getNumero_client() < 1) {
@@ -91,8 +92,6 @@ public class ClientAccess implements ClientDAO {
             Database.closeConnection();
             return c;
         } else {
-            ps.close();
-            Database.closeConnection();
             throw new Exception("L'usuari no s'ha pogut registrar, torna-ho a provar per favor");
         }
     }
@@ -128,8 +127,6 @@ public class ClientAccess implements ClientDAO {
             Database.closeConnection();
             return c;
         } else {
-            ps.close();
-            Database.closeConnection();
             throw new Exception("L'usuari no ha pogut ser actualitzat");
         }
     }
@@ -172,9 +169,6 @@ public class ClientAccess implements ClientDAO {
             // Retornam el client
             return c;
         } else {
-            ps.close();
-            rs.close();
-            Database.closeConnection();
             throw new Exception("L'usuari no existeix amb el número de client introduit");
         }
 

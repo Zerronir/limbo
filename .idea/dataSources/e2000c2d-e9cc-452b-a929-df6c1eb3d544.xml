@@ -1439,48 +1439,45 @@ producte_id</ColNames>
       <ColNames>nom</ColNames>
       <UnderlyingIndexName>provincia_nom_unique</UnderlyingIndexName>
     </key>
-    <check id="425" parent="344" name="codi_seguretat_check">
-      <Predicate>octet_length(`codi_seguretat`) = 3</Predicate>
-    </check>
-    <column id="426" parent="344" name="id">
+    <column id="425" parent="344" name="id">
       <Position>1</Position>
       <DataType>int(10) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="427" parent="344" name="tipus">
+    <column id="426" parent="344" name="tipus">
       <Position>2</Position>
       <DataType>enum(&apos;Visa&apos;, &apos;Mastercard&apos;, &apos;Maestro&apos;)|0e</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="428" parent="344" name="numero">
+    <column id="427" parent="344" name="numero">
       <Position>3</Position>
       <DataType>bigint(20) unsigned|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="429" parent="344" name="data_caducitat">
+    <column id="428" parent="344" name="data_caducitat">
       <Position>4</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="430" parent="344" name="codi_seguretat">
+    <column id="429" parent="344" name="codi_seguretat">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="431" parent="344" name="client_id">
+    <column id="430" parent="344" name="client_id">
       <Position>6</Position>
       <DataType>int(10) unsigned|0s</DataType>
     </column>
-    <index id="432" parent="344" name="targeta_client_fk">
+    <index id="431" parent="344" name="targeta_client_fk">
       <ColNames>client_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="433" parent="344" name="PRIMARY">
+    <key id="432" parent="344" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="434" parent="344" name="targeta_client_fk">
+    <foreign-key id="433" parent="344" name="targeta_client_fk">
       <ColNames>client_id</ColNames>
       <RefTableName>client</RefTableName>
       <RefColNames>numero_client</RefColNames>
