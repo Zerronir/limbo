@@ -6,6 +6,7 @@ import com.limbo.entities.DetallCompra;
 import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class CompraAccess implements CompraDAO {
     @Override
@@ -19,9 +20,17 @@ public class CompraAccess implements CompraDAO {
         ps.setInt(3, c.getClient_id());
         ps.setString(4, c.getId_transaccio());
         ps.setDate(5, c.getData());
+        boolean store = ps.execute();
 
-        if (ps.execute()) {
-            ps.execute();
+        ps = conn.prepareStatement("SELECT max(id) as idCompra FROM compra");
+        ResultSet rs = ps.executeQuery();
+        int id = rs.next() ? id = rs.getInt("idCompra") : 1;
+
+
+        if (store == false) {
+            c.setId(id);
+            ps.close();
+            rs.close();
             Database.closeConnection();
             return c;
         } else {
@@ -41,7 +50,7 @@ public class CompraAccess implements CompraDAO {
         ps.setDouble(4, dc.getPes());
         ps.setInt(5, dc.getUnitats_producte());
 
-        if(ps.execute()) {
+        if(!ps.execute()) {
             ps.close();
             Database.closeConnection();
         } else {

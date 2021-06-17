@@ -58,7 +58,7 @@ public class TargetAccess implements TargetaDAO{
             ps.setInt(4, t.getCodi_seguretat());
             ps.setInt(5, t.getClient_id());
 
-            if(ps.execute()) {
+            if(!ps.execute()) {
                 ps.close();
                 conn.close();
                 Database.closeConnection();

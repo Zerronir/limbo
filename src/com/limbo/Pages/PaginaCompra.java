@@ -185,9 +185,6 @@ public class PaginaCompra extends javax.swing.JPanel {
             AdrecaService as = new AdrecaServiceAccess();
             Compra compra = new Compra();
 
-            JOptionPane.showMessageDialog(null, jComboBox1.getSelectedItem().toString());
-            JOptionPane.showMessageDialog(null, jComboBox2.getSelectedItem().toString());
-
             compra.setTargeta_id(ts.getByNumeroEquals(jComboBox1.getSelectedItem().toString()).getId());
             compra.setAdreca_id(as.getAdrecaByCarrerEquals(jComboBox2.getSelectedItem().toString()).getId());
             compra.setClient_id(Main.logedUser.getNumero_client());

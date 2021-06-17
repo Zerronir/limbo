@@ -56,7 +56,7 @@ public class AdrecaAccess implements AdrecaDAO{
         ps.setString(6, a.getCp());
         ps.setInt(7, a.getCiutat_id());
 
-        if(ps.execute() == true) {
+        if(!ps.execute()) {
             ps.close();
             Database.closeConnection();
             return a;
